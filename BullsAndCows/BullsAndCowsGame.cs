@@ -8,17 +8,23 @@ namespace BullsAndCows
     {
         private readonly SecretGenerator secretGenerator;
         private readonly string secret = string.Empty;
+        private int gameCount;
         public BullsAndCowsGame(SecretGenerator secretGenerator)
         {
             this.secretGenerator = secretGenerator;
             this.secret = this.secretGenerator.GenerateSecret();
+            gameCount = 1;
         }
 
-        public bool CanContinue => true;
+        public bool CanContinue()
+        {
+            return gameCount < 6 ? true : false;
+        }
 
         public string Judge(string guess)
         {
             var guessWithOutSpace = guess.Replace(" ", string.Empty);
+            gameCount += 1;
             return this.Answer(this.secret, guessWithOutSpace);
         }
 
