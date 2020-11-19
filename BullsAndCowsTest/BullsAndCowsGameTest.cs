@@ -130,20 +130,37 @@ namespace BullsAndCowsTest
             Assert.Equal("0A4B", answer);
         }
 
-        //[Theory]
-        //[InlineData("4 1 3 2", "1234")]
-        //public void ShouldReturn1A3BGivenAllDigitAndOneRightPosition(string guess, string secret)
-        //{
-        //    // given
-        //    var mockSecretGenerator = new Mock<TestSecretGenerator>();
-        //    mockSecretGenerator.Setup(mock => mock.GenerateSecret()).Returns(secret);
-        //    var game = new BullsAndCowsGame(mockSecretGenerator.Object);
+        [Theory]
+        [InlineData("1 2 3 4", "1423")]
+        [InlineData("5 6 7 8", "8657")]
+        public void ShouldReturn1A3BGivenAllRightDigitAndOneRightPosition(string guess, string secret)
+        {
+            // given
+            var mockSecretGenerator = new Mock<TestSecretGenerator>();
+            mockSecretGenerator.Setup(mock => mock.GenerateSecret()).Returns(secret);
+            var game = new BullsAndCowsGame(mockSecretGenerator.Object);
 
-        //    // when
-        //    string answer = game.Guess(guess);
-        //    // then
-        //    Assert.Equal("1A3B", answer);
-        //}
+            // when
+            string answer = game.Guess(guess);
+            // then
+            Assert.Equal("1A3B", answer);
+        }
+
+        [Theory]
+        [InlineData("1 2 3 4", "1493")]
+        [InlineData("5 6 7 8", "1657")]
+        public void ShouldReturn1A2BGivenThreeRightDigitAndOneRightPosition(string guess, string secret)
+        {
+            // given
+            var mockSecretGenerator = new Mock<TestSecretGenerator>();
+            mockSecretGenerator.Setup(mock => mock.GenerateSecret()).Returns(secret);
+            var game = new BullsAndCowsGame(mockSecretGenerator.Object);
+
+            // when
+            string answer = game.Guess(guess);
+            // then
+            Assert.Equal("1A2B", answer);
+        }
     }
 
     public class TestSecretGenerator : SecretGenerator
