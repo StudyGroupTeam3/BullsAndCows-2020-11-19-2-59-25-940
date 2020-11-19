@@ -70,7 +70,24 @@ namespace BullsAndCows
 
                 if (count == 1)
                 {
-                    return "1A2B";
+                    result = "1A2B";
+                }
+            }
+
+            if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 2)
+            {
+                int count = 0;
+                for (int i = 0; i < secret.Length; i++)
+                {
+                    if (secret[i] == guess[i])
+                    {
+                        count++;
+                    }
+                }
+
+                if (count == 0)
+                {
+                    result = "0A2B";
                 }
             }
 
