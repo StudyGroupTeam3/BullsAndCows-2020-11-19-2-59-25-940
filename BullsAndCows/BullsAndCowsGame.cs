@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Reflection.Metadata;
 
 namespace BullsAndCows
@@ -25,7 +26,17 @@ namespace BullsAndCows
 
         private string Compare(string secret, string guess)
         {
-            return secret == guess ? "4A0B" : "0A0B";
+            if (secret == guess)
+            {
+                return "4A0B";
+            }
+
+            if (secret.Where(i => guess.Contains(i)).ToList().Count == 4)
+            {
+                return "0A4B";
+            }
+
+            return "0A0B";
         }
     }
 }
