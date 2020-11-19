@@ -9,35 +9,39 @@ namespace BullsAndCowsTest
         [Fact]
         public void Should_create_BullsAndCowsGame()
         {
-            var secretGenerator = new TestSecreteGenerator();
-            var game = new BullsAndCowsGame(secretGenerator);
+            var mockSecretGenerator = new Mock<SecretGenerator>();
+            var game = new BullsAndCowsGame(mockSecretGenerator.Object);
             Assert.NotNull(game);
             Assert.True(game.CanContinue);
         }
 
-        [Fact]
-        public void Should_return_0A0B_when_all_digit_and_position_wrong()
+        [Theory]
+        [InlineData("5 6 7 8", "1234")]
+        public void Should_return_0A0B_when_all_digit_and_position_wrong(string guess, string secret)
         {
             //given
-            var secretGenerator = new TestSecreteGenerator();
-            var game = new BullsAndCowsGame(secretGenerator);
+            var mockSecretGenerator = new Mock<SecretGenerator>();
+            mockSecretGenerator.Setup(mock => mock.GenerateSecret()).Returns(secret);
+            var game = new BullsAndCowsGame(mockSecretGenerator.Object);
 
             //when
-            var answer = game.Judge("5 6 7 8");
+            var answer = game.Judge(guess);
 
             //then
             Assert.Equal("0A0B", answer);
         }
 
-        [Fact]
-        public void Should_return_4A0B_when_all_digit_and_position_right()
+        [Theory]
+        [InlineData("1 2 3 4", "1234")]
+        public void Should_return_4A0B_when_all_digit_and_position_right(string guess, string secret)
         {
             //given
-            var secretGenerator = new TestSecreteGenerator();
-            var game = new BullsAndCowsGame(secretGenerator);
+            var mockSecretGenerator = new Mock<SecretGenerator>();
+            mockSecretGenerator.Setup(mock => mock.GenerateSecret()).Returns(secret);
+            var game = new BullsAndCowsGame(mockSecretGenerator.Object);
 
             //when
-            var answer = game.Judge("1 2 3 4");
+            var answer = game.Judge(guess);
 
             //then
             Assert.Equal("4A0B", answer);
@@ -107,8 +111,20 @@ namespace BullsAndCowsTest
             Assert.Equal("1A3B", answer);
         }
 
-        public class TestSecreteGenerator : SecretGenerator
+        [Theory]
+        [InlineData("a 4 4 2")]
+        [InlineData("a3 4 2")]
+        public void Should_IsInputValid_Show_false(string guess)
         {
+            //given
+            var mockSecretGenerator = new Mock<SecretGenerator>();
+            var game = new BullsAndCowsGame(mockSecretGenerator.Object);
+
+            //when
+            var answer = game.IsInputValid(guess);
+
+            //then
+            Assert.Equal(false, answer);
         }
     }
 }
