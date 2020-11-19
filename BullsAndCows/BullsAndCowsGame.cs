@@ -42,7 +42,6 @@ namespace BullsAndCows
         private string Compare(string secret, string guess)
         {
             string result = string.Empty;
-
             if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 0)
             {
                 result = "0A0B";
@@ -59,20 +58,7 @@ namespace BullsAndCows
                     }
                 }
 
-                if (count == 4)
-                {
-                    result = "4A0B";
-                }
-
-                if (count == 0)
-                {
-                    result = "0A4B";
-                }
-
-                if (count == 1)
-                {
-                    result = "1A3B";
-                }
+                result = $"{count.ToString()}A{(4 - count).ToString()}B";
             }
 
             if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 3)
