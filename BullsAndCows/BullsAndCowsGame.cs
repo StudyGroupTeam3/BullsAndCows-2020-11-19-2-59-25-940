@@ -23,21 +23,24 @@ namespace BullsAndCows
 
         private string Answer(string secret, string guess)
         {
-            if (secret == guess)
+            int bulls = 0;
+            int cows = 0;
+            for (int index = 0; index < secret.Length; index++)
             {
-                return "4A0B";
+                if (guess.Contains(secret[index]))
+                {
+                    if (guess.IndexOf(secret[index]) == index)
+                    {
+                        bulls += 1;
+                    }
+                    else
+                    {
+                        cows += 1;
+                    }
+                }
             }
 
-            if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 4)
-            {
-                return "0A4B";
-            }
-            else if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 2)
-            {
-                return "0A2B";
-            }
-
-            return "0A0B";
+            return $"{bulls}A{cows}B";
         }
     }
 }
