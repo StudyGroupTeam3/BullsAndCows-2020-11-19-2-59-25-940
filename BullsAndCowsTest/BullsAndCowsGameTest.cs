@@ -16,6 +16,7 @@ namespace BullsAndCowsTest
             Assert.True(game.CanContinue);
         }
 
+        /*
         [Fact]
         public void ShouldReturn0A0BGivenAllDigitAndWrongPosition()
         {
@@ -44,7 +45,7 @@ namespace BullsAndCowsTest
             Assert.Equal("4A0B", answer);
         }
 
-        //[Fact]
+
         [Theory]
         [InlineData("4 3 2 1")]
         [InlineData("3 4 2 1")]
@@ -79,6 +80,38 @@ namespace BullsAndCowsTest
             // then
             Assert.Equal("4A0B", answer);
         }
+        */
+
+        [Theory]
+        [InlineData("1 2 3 4", "5678")]
+        [InlineData("5 6 7 8", "1234")]
+        public void ShouldReturn4A0BGivenAllDigitAndAllRightPosition(string guess, string secret)
+        {
+            // given
+            var mockSecretGenerator = new Mock<TestSecretGenerator>();
+            mockSecretGenerator.Setup(mock => mock.GenerateSecret()).Returns(secret);
+            var game = new BullsAndCowsGame(mockSecretGenerator.Object);
+
+            // when
+            string answer = game.Guess(guess);
+            // then
+            Assert.Equal("0A0B", answer);
+        }
+
+        //[Theory]
+        //[InlineData("4 1 3 2", "1234")]
+        //public void ShouldReturn1A3BGivenAllDigitAndOneRightPosition(string guess, string secret)
+        //{
+        //    // given
+        //    var mockSecretGenerator = new Mock<TestSecretGenerator>();
+        //    mockSecretGenerator.Setup(mock => mock.GenerateSecret()).Returns(secret);
+        //    var game = new BullsAndCowsGame(mockSecretGenerator.Object);
+
+        //    // when
+        //    string answer = game.Guess(guess);
+        //    // then
+        //    Assert.Equal("1A3B", answer);
+        //}
     }
 
     public class TestSecretGenerator : SecretGenerator
