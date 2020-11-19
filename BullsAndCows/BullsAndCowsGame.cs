@@ -29,11 +29,6 @@ namespace BullsAndCows
                 result = "4A0B";
             }
 
-            if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 4)
-            {
-                result = "0A4B";
-            }
-
             if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 0)
             {
                 result = "0A0B";
