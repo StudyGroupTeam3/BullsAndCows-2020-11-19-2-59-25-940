@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace BullsAndCows
 {
@@ -26,6 +27,12 @@ namespace BullsAndCows
             if (secret == guess)
             {
                 return "4A0B";
+            }
+
+            //if (guess.Select(chr => secret.Contains(chr)).Aggregate((x, y) => x && y))
+            if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 4)
+            {
+                return "0A4B";
             }
 
             return "0A0B";
