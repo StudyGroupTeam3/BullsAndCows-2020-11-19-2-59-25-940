@@ -188,7 +188,7 @@ namespace BullsAndCowsTest
             var game = new BullsAndCowsGame(mockSecretGenerator.Object);
 
             // when
-            string answer = game.CheckInput(guess);
+            string answer = game.GetMessage(guess);
             // then
             Assert.Equal("Wrong Input, input again", answer);
         }
@@ -204,10 +204,41 @@ namespace BullsAndCowsTest
             var game = new BullsAndCowsGame(mockSecretGenerator.Object);
 
             // when
-            string answer = game.CheckInput(guess);
+            string answer = game.GetMessage(guess);
             // then
             Assert.Equal("Wrong Input, input again", answer);
         }
+
+        //[Theory]
+        //[InlineData("q 2 3 6", "2619")]
+        //public void ShouldReturnInformationInputNotNumbers(string guess, string secret)
+        //{
+        //    // given
+        //    var mockSecretGenerator = new Mock<TestSecretGenerator>();
+        //    mockSecretGenerator.Setup(mock => mock.GenerateSecret()).Returns(secret);
+        //    var game = new BullsAndCowsGame(mockSecretGenerator.Object);
+
+        //    // when
+        //    string answer = game.CheckInput(guess);
+        //    // then
+        //    Assert.Equal("Wrong Input, input again", answer);
+        //}
+
+        //[Theory]
+        //[InlineData("1  2 3 6", "2619")]
+        //[InlineData("1     5", "2619")]
+        //public void ShouldReturnInformationIfInputMoreThanOneSpace(string guess, string secret)
+        //{
+        //    // given
+        //    var mockSecretGenerator = new Mock<TestSecretGenerator>();
+        //    mockSecretGenerator.Setup(mock => mock.GenerateSecret()).Returns(secret);
+        //    var game = new BullsAndCowsGame(mockSecretGenerator.Object);
+
+        //    // when
+        //    string answer = game.CheckInput(guess);
+        //    // then
+        //    Assert.Equal("Wrong Input, input again", answer);
+        //}
     }
 
     public class TestSecretGenerator : SecretGenerator

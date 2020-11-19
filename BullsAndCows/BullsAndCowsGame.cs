@@ -17,10 +17,11 @@ namespace BullsAndCows
 
         public bool CanContinue => true;
 
-        public string CheckInput(string guess)
+        public string GetMessage(string guess)
         {
             var guessWithoutSpace = guess.Replace(" ", string.Empty);
-            if (guessWithoutSpace.Length < 4)
+
+            if (guess.Length < 8 && guessWithoutSpace.Length < 4)
             {
                 return this.errorInformation;
             }
@@ -31,7 +32,7 @@ namespace BullsAndCows
                 return this.errorInformation;
             }
 
-            return string.Empty;
+            return "OK";
         }
 
         public string Guess(string guess)
