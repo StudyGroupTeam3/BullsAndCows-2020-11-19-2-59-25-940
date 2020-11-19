@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BullsAndCows
 {
@@ -7,17 +9,17 @@ namespace BullsAndCows
         public virtual string GenerateSecret()
         {
             Random random = new Random();
-            int[] secret = new int[4];
-            secret[0] = random.Next(0, 10);
+            List<int> secret = new List<int>();
+            secret.Add(random.Next(0, 10));
             for (var i = 1; i < 4; i++)
             {
                 int tempRandomDigital = random.Next(0, 10);
-                while (tempRandomDigital == secret[i - 1])
+                while (secret.Contains(tempRandomDigital))
                 {
                     tempRandomDigital += random.Next(0, 10) - 10;
                 }
 
-                secret[i] = tempRandomDigital;
+                secret.Add(tempRandomDigital);
             }
 
             return string.Join(string.Empty, secret);
