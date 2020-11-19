@@ -1,5 +1,7 @@
 using BullsAndCows;
 using Moq;
+using System.Linq;
+using System.Text.RegularExpressions;
 using Xunit;
 
 namespace BullsAndCowsTest
@@ -125,6 +127,31 @@ namespace BullsAndCowsTest
 
             // then
             Assert.False(canContinue);
+        }
+
+        [Fact]
+        public void Should_GenerateSecret_return_valid_secret()
+        {
+            // given
+            var secretGenerator = new SecretGenerator();
+
+            // when
+            var secret = secretGenerator.GenerateSecret();
+
+            // then
+            Assert.True(IsSecretValid(secret));
+        }
+
+        private bool IsSecretValid(string secret)
+        {
+            string a = secret;
+            if (new Regex(@"^([0-9]){4}$").IsMatch(secret))
+            {
+                int b = 5;
+                return secret.Length == 4;
+            }
+
+            return false;
         }
     }
 
