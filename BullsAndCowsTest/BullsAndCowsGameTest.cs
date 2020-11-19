@@ -3,6 +3,14 @@ using Xunit;
 
 namespace BullsAndCowsTest
 {
+    public class TestSecretGenerator : SecretGenerator
+    {
+        public override string GenerateSecret()
+        {
+            return "1234";
+        }
+    }
+
     public class BullsAndCowsGameTest
     {
         [Fact]
@@ -38,24 +46,18 @@ namespace BullsAndCowsTest
             Assert.Equal("4A0B", answer);
         }
 
-        [Fact]
-        public void Should_return_0A4B_when_all_digit_right_and_all_position_wrong()
+        [Theory]
+        [InlineData("4 3 2 1")]
+        [InlineData("4 3 1 2")]
+        public void Should_return_0A4B_when_all_digit_right_and_all_position_wrong(string guess)
         {
             // given
             var testSecretGenerator = new TestSecretGenerator();
             var game = new BullsAndCowsGame(testSecretGenerator);
             // when
-            string answer = game.Guess("4 3 2 1");
+            string answer = game.Guess(guess);
             // then
             Assert.Equal("0A4B", answer);
-        }
-
-        public class TestSecretGenerator : SecretGenerator
-        {
-            public override string GenerateSecret()
-            {
-                return "1234";
-            }
         }
     }
 }
