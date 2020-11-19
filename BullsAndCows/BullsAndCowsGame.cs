@@ -5,6 +5,7 @@ namespace BullsAndCows
 {
     public class BullsAndCowsGame
     {
+        private readonly int digitNumber = 5;
         private readonly SecretGenerator secretGenerator;
         private readonly string secret = string.Empty;
         private readonly string errorInformation = "Wrong Input, input again";
@@ -39,59 +40,29 @@ namespace BullsAndCows
             return this.Compare(this.secret, guessWithoutSpace);
         }
 
+        private int GetCount(string secret, string guess)
+        {
+            int count = 0;
+            for (int i = 0; i < secret.Length; i++)
+            {
+                if (secret[i] == guess[i])
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
         private string Compare(string secret, string guess)
         {
             string result = string.Empty;
-            if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 0)
+            int count = GetCount(secret, guess);
+            for (int number = 0; number < digitNumber; number++)
             {
-                result = "0A0B";
-            }
-
-            if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 4)
-            {
-                int count = 0;
-                for (int i = 0; i < secret.Length; i++)
+                if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == number)
                 {
-                    if (secret[i] == guess[i])
-                    {
-                        count++;
-                    }
-                }
-
-                result = $"{count.ToString()}A{(4 - count).ToString()}B";
-            }
-
-            if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 3)
-            {
-                int count = 0;
-                for (int i = 0; i < secret.Length; i++)
-                {
-                    if (secret[i] == guess[i])
-                    {
-                        count++;
-                    }
-                }
-
-                if (count == 1)
-                {
-                    result = "1A2B";
-                }
-            }
-
-            if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 2)
-            {
-                int count = 0;
-                for (int i = 0; i < secret.Length; i++)
-                {
-                    if (secret[i] == guess[i])
-                    {
-                        count++;
-                    }
-                }
-
-                if (count == 0)
-                {
-                    result = "0A2B";
+                    result = $"{count.ToString()}A{(number - count).ToString()}B";
                 }
             }
 
