@@ -27,6 +27,20 @@ namespace BullsAndCowsTest
             // then
             Assert.Equal("0A0B", answer);
         }
+
+        [Fact]
+        public void Should_return_4A0B_when_all_digit_and_position_right()
+        {
+            // given
+            var secretGenerator = new TestSecretGenerator();
+            var game = new BullsAndCowsGame(secretGenerator);
+
+            // when
+            var answer = game.Guess("1234");
+
+            // then
+            Assert.Equal("4A0B", answer);
+        }
     }
 
     public class TestSecretGenerator : SecretGenerator

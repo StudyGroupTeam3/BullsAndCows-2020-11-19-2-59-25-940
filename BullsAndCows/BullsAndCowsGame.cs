@@ -24,7 +24,7 @@ namespace BullsAndCows
 
         private string Compare(string secret, string guess)
         {
-            return "0A0B";
+            return secret == guess ? "4A0B" : "0A0B";
         }
     }
 }
