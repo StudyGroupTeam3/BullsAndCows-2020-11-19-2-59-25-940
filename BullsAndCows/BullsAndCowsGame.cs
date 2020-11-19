@@ -15,15 +15,18 @@ namespace BullsAndCows
             this.secret = this.secretGenerator.GenerateSecret();
         }
 
-        public bool CanContinue()
+        public bool CanContinue
         {
-            if (guessTimes <= 6)
+            get
             {
-                guessTimes += 1;
-                return true;
-            }
+                if (guessTimes <= 6)
+                {
+                    guessTimes += 1;
+                    return true;
+                }
 
-            return false;
+                return false;
+            }
         }
 
         public void InvalidRun()
