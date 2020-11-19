@@ -29,10 +29,11 @@ namespace BullsAndCows
                 return "4A0B";
             }
 
-            //if (guess.Select(chr => secret.Contains(chr)).Aggregate((x, y) => x && y))
             if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 4)
             {
-                return "0A4B";
+                int numberOfA = secret.Where(secretChar => guess.IndexOf(secretChar) == secret.IndexOf(secretChar)).ToList().Count;
+                int numberOfB = 4 - numberOfA;
+                return $"{numberOfA}A{numberOfB}B";
             }
 
             return "0A0B";
