@@ -12,7 +12,7 @@ namespace BullsAndCowsTest
             var mockSecretGenerator = new Mock<SecretGenerator>();
             var game = new BullsAndCowsGame(mockSecretGenerator.Object);
             Assert.NotNull(game);
-            Assert.True(game.CanContinue);
+            Assert.True(game.CanContinue());
         }
 
         [Fact]
