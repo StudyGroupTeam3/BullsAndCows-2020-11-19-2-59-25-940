@@ -35,6 +35,12 @@ namespace BullsAndCows
                 int numberOfB = 4 - numberOfA;
                 return $"{numberOfA}A{numberOfB}B";
             }
+            else
+            {
+                int numberOfA = secret.Where(secretChar => guess.IndexOf(secretChar) == secret.IndexOf(secretChar)).ToList().Count;
+                int numberOfB = secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count - numberOfA;
+                return $"{numberOfA}A{numberOfB}B";
+            }
 
             return "0A0B";
         }
