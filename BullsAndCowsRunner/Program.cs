@@ -9,20 +9,14 @@ namespace BullsAndCowsRunner
     {
         public static void Main(string[] args)
         {
-            TestSecretGenerator secretGenerator = new TestSecretGenerator();
+            SecretGenerator secretGenerator = new SecretGenerator();
             BullsAndCowsGame game = new BullsAndCowsGame(secretGenerator);
-            string input = "4321";
-            var output = game.Guess(input);
-            Console.WriteLine(output);
-            //while (game.CanContinue)
-            //{
-            //    var input = Console.ReadLine();
-            //    var output = game.Guess(input);
-            //    Console.WriteLine(output);
-            //}
-
-            //string x = "1234";
-            //string y = "4321";
+            while (game.CanContinue)
+            {
+                var input = Console.ReadLine();
+                var output = game.Guess(input);
+                Console.WriteLine(output);
+            }
 
             Console.WriteLine("Game Over");
         }
