@@ -8,13 +8,16 @@ namespace BullsAndCows
     {
         private readonly SecretGenerator secretGenerator;
         private readonly string secret = string.Empty;
+        private int inputTimes = 0;
         public BullsAndCowsGame(SecretGenerator secretGenerator)
         {
             this.secretGenerator = secretGenerator;
             this.secret = this.secretGenerator.GenerateSecret();
         }
 
-        public bool CanContinue(string input)
+        public bool CanContinue => inputTimes < 6;
+
+        public bool IsInputValid(string input)
         {
             if (new Regex(@"^([0-9]\s){3}[0-9]$").IsMatch(input))
             {
@@ -44,6 +47,11 @@ namespace BullsAndCows
             }
 
             return $"{countRightPosition}A{countRightNumber}B";
+        }
+
+        public void CountInputTimes()
+        {
+            this.inputTimes++;
         }
     }
 }

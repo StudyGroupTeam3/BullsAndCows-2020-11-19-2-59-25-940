@@ -102,7 +102,7 @@ namespace BullsAndCowsTest
             var game = new BullsAndCowsGame(mockSecretGenerator.Object);
 
             // when
-            var canContinue = game.CanContinue(guess);
+            var canContinue = game.IsInputValid(guess);
 
             // then
             Assert.True(canContinue);
@@ -123,7 +123,7 @@ namespace BullsAndCowsTest
             var game = new BullsAndCowsGame(mockSecretGenerator.Object);
 
             // when
-            var canContinue = game.CanContinue(guess);
+            var canContinue = game.IsInputValid(guess);
 
             // then
             Assert.False(canContinue);
