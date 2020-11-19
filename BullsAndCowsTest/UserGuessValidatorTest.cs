@@ -46,5 +46,17 @@ namespace BullsAndCowsTest
             // then
             Assert.False(validateResult);
         }
+
+        [Theory]
+        [InlineData("a  .")]
+        public void Should_return_false_when_not_all_user_guess_is_digital_and_length_is_not_4(string userGuess)
+        {
+            // given
+            UserGuessValidator userGuessValidator = new UserGuessValidator();
+            // when
+            bool validateResult = userGuessValidator.Validate(userGuess);
+            // then
+            Assert.False(validateResult);
+        }
     }
 }
