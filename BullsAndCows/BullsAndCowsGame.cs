@@ -24,6 +24,12 @@ namespace BullsAndCows
                 return this.errorInformation;
             }
 
+            var guessWithoutSpaceAndGet4Char = guessWithoutSpace.Substring(0, 4);
+            if (guessWithoutSpaceAndGet4Char.Length != guessWithoutSpaceAndGet4Char.Distinct().Count())
+            {
+                return this.errorInformation;
+            }
+
             return string.Empty;
         }
 

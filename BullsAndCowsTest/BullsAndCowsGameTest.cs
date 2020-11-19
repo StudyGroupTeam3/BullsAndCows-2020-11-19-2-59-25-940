@@ -180,6 +180,22 @@ namespace BullsAndCowsTest
 
         [Theory]
         [InlineData("1 3", "2619")]
+        public void ShouldReturnInformationGivenInCompleteInput(string guess, string secret)
+        {
+            // given
+            var mockSecretGenerator = new Mock<TestSecretGenerator>();
+            mockSecretGenerator.Setup(mock => mock.GenerateSecret()).Returns(secret);
+            var game = new BullsAndCowsGame(mockSecretGenerator.Object);
+
+            // when
+            string answer = game.CheckInput(guess);
+            // then
+            Assert.Equal("Wrong Input, input again", answer);
+        }
+
+        [Theory]
+        [InlineData("1 1 3 6", "2619")]
+        [InlineData("1 1 2 2", "2619")]
         public void ShouldReturnInformationGivenDuplicateNumber(string guess, string secret)
         {
             // given
