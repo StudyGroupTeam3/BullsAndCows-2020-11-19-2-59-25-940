@@ -7,6 +7,7 @@ namespace BullsAndCows
     {
         private readonly SecretGenerator secretGenerator;
         private readonly string secret = string.Empty;
+        private int guessTimes = 1;
 
         public BullsAndCowsGame(SecretGenerator secretGenerator)
         {
@@ -14,7 +15,21 @@ namespace BullsAndCows
             this.secret = this.secretGenerator.GenerateSecret();
         }
 
-        public bool CanContinue => true;
+        public bool CanContinue()
+        {
+            if (guessTimes <= 6)
+            {
+                guessTimes += 1;
+                return true;
+            }
+
+            return false;
+        }
+
+        public void InvalidRun()
+        {
+            guessTimes -= 1;
+        }
 
         public string Guess(string guess)
         {
