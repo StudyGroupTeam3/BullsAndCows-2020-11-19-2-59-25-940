@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace BullsAndCows
 {
@@ -14,7 +16,12 @@ namespace BullsAndCows
 
         public bool CanContinue(string input)
         {
-            return true;
+            if (new Regex(@"^([0-9]\s){3}[0-9]$").IsMatch(input))
+            {
+                return input.Split(" ").Distinct().ToArray().Length == 4;
+            }
+
+            return false;
         }
 
         public string Guess(string guess)

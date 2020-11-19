@@ -106,23 +106,26 @@ namespace BullsAndCowsTest
             Assert.True(canContinue);
         }
 
-        //[Theory]
-        //[InlineData("5,6,7,8")]
-        //[InlineData("6 5 7")]
-        //[InlineData("6 6 7 8")]
-        //public void Should_CanContinue_return_false_when_input_invalid(string guess)
-        //{
-        //    // given
-        //    var mockSecretGenerator = new Mock<SecretGenerator>();
-        //    mockSecretGenerator.Setup(mock => mock.GenerateSecret()).Returns(string.Empty);
-        //    var game = new BullsAndCowsGame(mockSecretGenerator.Object);
+        [Theory]
+        [InlineData("5,6,7,8")]
+        [InlineData("6 5 7")]
+        [InlineData("6 6 7 8")]
+        [InlineData("a 6 7 8")]
+        [InlineData("5 6 7 10")]
+        [InlineData("-1 6 7 4")]
+        public void Should_CanContinue_return_false_when_input_invalid(string guess)
+        {
+            // given
+            var mockSecretGenerator = new Mock<SecretGenerator>();
+            mockSecretGenerator.Setup(mock => mock.GenerateSecret()).Returns(string.Empty);
+            var game = new BullsAndCowsGame(mockSecretGenerator.Object);
 
-        //    // when
-        //    var canContinue = game.CanContinue(guess);
+            // when
+            var canContinue = game.CanContinue(guess);
 
-        //    // then
-        //    Assert.False(canContinue);
-        //}
+            // then
+            Assert.False(canContinue);
+        }
     }
 
     public class TestSecretGenerator : SecretGenerator
