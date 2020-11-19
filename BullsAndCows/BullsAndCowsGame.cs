@@ -24,14 +24,32 @@ namespace BullsAndCows
         private string Compare(string secret, string guess)
         {
             string result = string.Empty;
-            if (secret == guess)
-            {
-                result = "4A0B";
-            }
 
             if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 0)
             {
                 result = "0A0B";
+            }
+
+            if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 4)
+            {
+                int count = 0;
+                for (int i = 0; i < secret.Length; i++)
+                {
+                    if (secret[i] == guess[i])
+                    {
+                        count++;
+                    }
+                }
+
+                if (count == 4)
+                {
+                    result = "4A0B";
+                }
+
+                if (count == 0)
+                {
+                    result = "0A4B";
+                }
             }
 
             return result;

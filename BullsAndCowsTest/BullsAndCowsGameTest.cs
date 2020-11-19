@@ -114,6 +114,22 @@ namespace BullsAndCowsTest
             Assert.Equal("4A0B", answer);
         }
 
+        [Theory]
+        [InlineData("1 2 3 4", "4321")]
+        [InlineData("5 6 7 8", "8765")]
+        public void ShouldReturn0A4BGivenAllRightDigitAndNoRightPosition(string guess, string secret)
+        {
+            // given
+            var mockSecretGenerator = new Mock<TestSecretGenerator>();
+            mockSecretGenerator.Setup(mock => mock.GenerateSecret()).Returns(secret);
+            var game = new BullsAndCowsGame(mockSecretGenerator.Object);
+
+            // when
+            string answer = game.Guess(guess);
+            // then
+            Assert.Equal("0A4B", answer);
+        }
+
         //[Theory]
         //[InlineData("4 1 3 2", "1234")]
         //public void ShouldReturn1A3BGivenAllDigitAndOneRightPosition(string guess, string secret)

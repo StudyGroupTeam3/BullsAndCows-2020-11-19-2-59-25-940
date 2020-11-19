@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using BullsAndCows;
+using BullsAndCowsTest;
 
 namespace BullsAndCowsRunner
 {
@@ -8,8 +9,11 @@ namespace BullsAndCowsRunner
     {
         public static void Main(string[] args)
         {
-            //SecretGenerator secretGenerator = new SecretGenerator();
-            //BullsAndCowsGame game = new BullsAndCowsGame(secretGenerator);
+            TestSecretGenerator secretGenerator = new TestSecretGenerator();
+            BullsAndCowsGame game = new BullsAndCowsGame(secretGenerator);
+            string input = "4321";
+            var output = game.Guess(input);
+            Console.WriteLine(output);
             //while (game.CanContinue)
             //{
             //    var input = Console.ReadLine();
@@ -17,13 +21,8 @@ namespace BullsAndCowsRunner
             //    Console.WriteLine(output);
             //}
 
-            string a = "1234";
-            string b = "1423";
-            var c = a.Where(secretChar => b.Contains(secretChar)).ToList();
-            foreach (var i in c)
-            {
-                Console.WriteLine(i);
-            }
+            //string x = "1234";
+            //string y = "4321";
 
             Console.WriteLine("Game Over");
         }
