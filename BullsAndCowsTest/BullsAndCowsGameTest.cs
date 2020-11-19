@@ -109,10 +109,6 @@ namespace BullsAndCowsTest
 
         public class TestSecreteGenerator : SecretGenerator
         {
-            public override string GenerateSecret()
-            {
-                return "1234";
-            }
         }
     }
 }
