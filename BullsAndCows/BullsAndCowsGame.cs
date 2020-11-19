@@ -15,13 +15,9 @@ namespace BullsAndCows
         {
             this.secretGenerator = secretGenerator;
             this.secret = this.secretGenerator.GenerateSecret();
-            GameMaxCount = 6;
-            CanContinue = 0;
         }
 
-        public int CanContinue { get; set; }
-
-        public int GameMaxCount { get; set; }
+        public bool CanContinue => true;
 
         public string Guess(string guess)
         {

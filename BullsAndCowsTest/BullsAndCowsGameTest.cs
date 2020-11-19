@@ -12,7 +12,7 @@ namespace BullsAndCowsTest
             var secretGenerator = new TestSecretGenerator();
             var game = new BullsAndCowsGame(secretGenerator);
             Assert.NotNull(game);
-            Assert.True(true);
+            Assert.True(game.CanContinue);
         }
 
         [Fact]

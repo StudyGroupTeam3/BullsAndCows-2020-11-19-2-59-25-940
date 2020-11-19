@@ -1,7 +1,6 @@
-﻿using System;
-using System.Data.SqlTypes;
+﻿using BullsAndCows;
+using System;
 using System.Linq;
-using BullsAndCows;
 
 namespace BullsAndCowsRunner
 {
@@ -11,7 +10,10 @@ namespace BullsAndCowsRunner
         {
             SecretGenerator secretGenerator = new SecretGenerator();
             BullsAndCowsGame game = new BullsAndCowsGame(secretGenerator);
-            while (game.CanContinue < game.GameMaxCount)
+
+            const int maxCount = 6;
+            var count = 0;
+            while (game.CanContinue)
             {
                 var input = Console.ReadLine();
 
@@ -23,13 +25,12 @@ namespace BullsAndCowsRunner
 
                 var output = game.Guess(input);
                 Console.WriteLine(output);
+                count++;
 
-                if (output == "4A0B")
+                if (output == "4A0B" || count == maxCount)
                 {
                     break;
                 }
-
-                game.CanContinue++;
             }
 
             Console.WriteLine("Game Over");
@@ -44,12 +45,7 @@ namespace BullsAndCowsRunner
                 return false;
             }
 
-            if (input.ToArray().Distinct().Count() != input.Length)
-            {
-                return false;
-            }
-
-            return true;
+            return input.ToArray().Distinct().Count() == input.Length;
         }
     }
 }
