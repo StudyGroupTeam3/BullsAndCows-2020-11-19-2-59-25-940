@@ -1,4 +1,5 @@
 using BullsAndCows;
+using Moq;
 using Xunit;
 
 namespace BullsAndCowsTest
@@ -43,19 +44,35 @@ namespace BullsAndCowsTest
         }
 
         [Theory]
-        [InlineData("4 3 2 1")]
-        //[InlineData("4 3 1 2")]
-        public void Should_return_0A4B_when_all_digit_right_and_position_wrong(string guess)
+        [InlineData("4 3 2 1", "1234")]
+        public void Should_return_0A4B_when_all_digit_right_and_position_wrong(string guess, string secret)
         {
             //given
-            var secretGenerator = new TestSecreteGenerator();
-            var game = new BullsAndCowsGame(secretGenerator);
+            var mockSecretGenerator = new Mock<SecretGenerator>();
+            mockSecretGenerator.Setup(mock => mock.GenerateSecret()).Returns(secret);
+            var game = new BullsAndCowsGame(mockSecretGenerator.Object);
 
             //when
             var answer = game.Judge(guess);
 
             //then
             Assert.Equal("0A4B", answer);
+        }
+
+        [Theory]
+        [InlineData("2 3 5 6", "1234")]
+        public void Should_return_0A2B_when_2_digit_right_and_all_position_wrong(string guess, string secret)
+        {
+            //given
+            var mockSecretGenerator = new Mock<SecretGenerator>();
+            mockSecretGenerator.Setup(mock => mock.GenerateSecret()).Returns(secret);
+            var game = new BullsAndCowsGame(mockSecretGenerator.Object);
+
+            //when
+            var answer = game.Judge(guess);
+
+            //then
+            Assert.Equal("0A2B", answer);
         }
 
         public class TestSecreteGenerator : SecretGenerator

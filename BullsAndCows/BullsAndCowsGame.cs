@@ -32,6 +32,10 @@ namespace BullsAndCows
             {
                 return "0A4B";
             }
+            else if (secret.Where(secretChar => guess.Contains(secretChar)).ToList().Count == 2)
+            {
+                return "0A2B";
+            }
 
             return "0A0B";
         }
