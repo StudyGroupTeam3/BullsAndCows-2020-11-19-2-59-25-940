@@ -21,7 +21,7 @@ namespace BullsAndCowsTest
             var testSecretGenerator = new TestSecretGenerator();
             var game = new BullsAndCowsGame(testSecretGenerator);
             // when
-            string answer = game.Guess("5678");
+            string answer = game.Guess("5 6 7 8");
             // then
             Assert.Equal("0A0B", answer);
         }
@@ -33,7 +33,7 @@ namespace BullsAndCowsTest
             var testSecretGenerator = new TestSecretGenerator();
             var game = new BullsAndCowsGame(testSecretGenerator);
             // when
-            string answer = game.Guess("1234");
+            string answer = game.Guess("1 2 3 4");
             // then
             Assert.Equal("4A0B", answer);
         }
