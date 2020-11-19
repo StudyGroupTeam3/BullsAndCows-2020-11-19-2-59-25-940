@@ -85,5 +85,20 @@ namespace BullsAndCowsTest
             // then
             Assert.Equal("0A2B", answer);
         }
+
+        [Theory]
+        [InlineData("1 4 5 2", "1234")]
+        [InlineData("2 5 3 1", "1234")]
+        public void Should_return_1A2B_when_three_digit_right_and_one_position_right(string guess, string secret)
+        {
+            // given
+            var mockSecretGenerator = new Mock<SecretGenerator>();
+            mockSecretGenerator.Setup(mock => mock.GenerateSecret()).Returns(secret);
+            var game = new BullsAndCowsGame(mockSecretGenerator.Object);
+            // when
+            string answer = game.Guess(guess);
+            // then
+            Assert.Equal("1A2B", answer);
+        }
     }
 }
