@@ -12,7 +12,10 @@ namespace BullsAndCows
             this.secret = this.secretGenerator.GenerateSecret();
         }
 
-        public bool CanContinue => true;
+        public bool CanContinue(string input)
+        {
+            return true;
+        }
 
         public string Guess(string guess)
         {
