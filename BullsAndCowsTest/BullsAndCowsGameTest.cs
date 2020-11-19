@@ -177,6 +177,21 @@ namespace BullsAndCowsTest
             // then
             Assert.Equal("0A2B", answer);
         }
+
+        [Theory]
+        [InlineData("1 3", "2619")]
+        public void ShouldReturnInformationGivenDuplicateNumber(string guess, string secret)
+        {
+            // given
+            var mockSecretGenerator = new Mock<TestSecretGenerator>();
+            mockSecretGenerator.Setup(mock => mock.GenerateSecret()).Returns(secret);
+            var game = new BullsAndCowsGame(mockSecretGenerator.Object);
+
+            // when
+            string answer = game.CheckInput(guess);
+            // then
+            Assert.Equal("Wrong Input, input again", answer);
+        }
     }
 
     public class TestSecretGenerator : SecretGenerator

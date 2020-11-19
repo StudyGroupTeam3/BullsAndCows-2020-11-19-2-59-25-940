@@ -7,6 +7,7 @@ namespace BullsAndCows
     {
         private readonly SecretGenerator secretGenerator;
         private readonly string secret = string.Empty;
+        private readonly string errorInformation = "Wrong Input, input again";
         public BullsAndCowsGame(SecretGenerator secretGenerator)
         {
             this.secretGenerator = secretGenerator;
@@ -14,6 +15,17 @@ namespace BullsAndCows
         }
 
         public bool CanContinue => true;
+
+        public string CheckInput(string guess)
+        {
+            var guessWithoutSpace = guess.Replace(" ", string.Empty);
+            if (guessWithoutSpace.Length < 4)
+            {
+                return this.errorInformation;
+            }
+
+            return string.Empty;
+        }
 
         public string Guess(string guess)
         {
