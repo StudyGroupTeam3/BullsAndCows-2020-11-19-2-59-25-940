@@ -12,8 +12,21 @@ namespace BullsAndCowsRunner
             while (game.CanContinue)
             {
                 var input = Console.ReadLine();
+                if (!game.IsInputValid(input))
+                {
+                    Console.WriteLine("Wrong Input, input again");
+                    continue;
+                }
+
                 var output = game.Guess(input);
                 Console.WriteLine(output);
+                if (output == "4A0B")
+                {
+                    Console.WriteLine("You win");
+                    break;
+                }
+
+                game.CountInputTimes();
             }
 
             Console.WriteLine("Game Over");
