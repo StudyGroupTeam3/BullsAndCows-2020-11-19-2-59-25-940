@@ -9,11 +9,26 @@ namespace BullsAndCowsRunner
         {
             SecretGenerator secretGenerator = new SecretGenerator();
             BullsAndCowsGame game = new BullsAndCowsGame(secretGenerator);
-            while (game.CanContinue)
+            var input = Console.ReadLine();
+            while (!game.IsInputValid(input))
             {
-                var input = Console.ReadLine();
-                var output = game.Guess(input);
-                Console.WriteLine(output);
+                Console.WriteLine("Wrong Input, input again! \n");
+                input = Console.ReadLine();
+            }
+
+            while (game.CanContinue())
+            {
+                var output = game.Judge(input);
+                if (output == "4A0B")
+                {
+                    Console.WriteLine(output);
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine(output);
+                    input = Console.ReadLine();
+                }
             }
 
             Console.WriteLine("Game Over");
