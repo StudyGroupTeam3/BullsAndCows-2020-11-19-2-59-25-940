@@ -9,8 +9,9 @@ namespace BullsAndCows
         {
             var rand = new Random();
             var numbers = new List<int>();
+            const int numberCount = 4;
 
-            for (var i = 0; i < 6; i++)
+            for (var i = 0; i < numberCount; i++)
             {
                 int number;
                 do
