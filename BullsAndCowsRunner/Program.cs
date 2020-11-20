@@ -12,7 +12,6 @@ namespace BullsAndCowsRunner
             SecretGenerator secretGenerator = new SecretGenerator();
             BullsAndCowsGame game = new BullsAndCowsGame(secretGenerator);
 
-            Console.WriteLine(secretGenerator.GenerateSecret());
             while (game.CanContinue)
             {
                 var input = Console.ReadLine();
